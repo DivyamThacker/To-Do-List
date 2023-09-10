@@ -80,18 +80,18 @@ switch(day) {
         break;
 }
 
+const arr=[];
+const Work_arr=[];
+
 app.get("/", (req,res)=>{
     // console.log(req.body);
-    res.render("index.ejs", {day : day, date : _date, month: month });
+    res.render("index.ejs", {day : day, date : _date, month: month ,array : arr, size: arr.length});
 });
 
 app.get("/work", (req,res)=>{
     // console.log(req.body);
-    res.render("windex.ejs");
+    res.render("windex.ejs",{warray: Work_arr, size: Work_arr.length});
 });
-
-const arr=[];
-const Work_arr=[];
 
 
 app.post("/", (req,res)=>{
@@ -101,11 +101,12 @@ app.post("/", (req,res)=>{
 });
 
 app.post("/work", (req,res)=>{
-    // console.log(req.body);
-    let string=  req.body.newItem;
-    Work_arr.push(string);
-    let size= arr.length;
-    res.render("windex.ejs", {Work_array : Work_arr, W_size : size});
+    res.send("oi");
+    console.log(req.body);
+    // let string=  req.body.newItem;
+    // Work_arr.push(string);
+    // let size= arr.length;
+    // res.render("windex.ejs", {Work_array : Work_arr, W_size : size});
 });
 
 app.listen(port, ()=>{
