@@ -84,29 +84,37 @@ const arr=[];
 const Work_arr=[];
 
 app.get("/", (req,res)=>{
-    // console.log(req.body);
-    res.render("index.ejs", {day : day, date : _date, month: month ,array : arr, size: arr.length});
+    if (arr.length>0)
+    {
+        console.log(arr);
+        res.render("index.ejs", {day : day, date : _date, month: month ,array : arr, size: arr.length});
+    }
+    else{
+        console.log("get");
+        res.render("index.ejs", {day : day, date : _date, month: month});
+    }
 });
 
 app.get("/work", (req,res)=>{
-    // console.log(req.body);
-    res.render("windex.ejs",{warray: Work_arr, size: Work_arr.length});
+    if (Work_arr.length>0)
+    {
+        console.log(Work_arr);
+        res.render("windex.ejs", {warray : Work_arr, wsize: Work_arr.length});
+    }
+    else{
+        res.render("windex.ejs");
+    }
 });
 
 
 app.post("/", (req,res)=>{
-    // res.render("index.ejs", {day : day, date : _date, month: month });
-    res.send("oi");
-    console.log("chutiya");
+    arr.push(req.body.newItem); 
+    res.render("index.ejs", {day : day, date : _date, month: month ,array : arr, size: arr.length});
 });
 
 app.post("/work", (req,res)=>{
-    res.send("oi");
-    console.log(req.body);
-    // let string=  req.body.newItem;
-    // Work_arr.push(string);
-    // let size= arr.length;
-    // res.render("windex.ejs", {Work_array : Work_arr, W_size : size});
+    Work_arr.push(req.body.newItem); 
+    res.render("windex.ejs",{warray : Work_arr, wsize: Work_arr.length});
 });
 
 app.listen(port, ()=>{

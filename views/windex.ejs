@@ -1,102 +1,44 @@
 <%- include("partials/header.ejs") %>
-
+<div class="container">
 <div id="box">
     
-    
+       <% if (locals.warray && locals.wsize) {%>
+
+                <%  for (let i = 0; i <  wsize ; i++) {%>
+                    <div class="item">
+                        <input type="checkbox" class="cut"name="">
+                        <p><%= warray[i]%></p>
+                    </div>
+                <%}%>
+       <% } %>
+
+        <form action="/work" class="list" method="post" name="myform">
             <div id="newAdder">
                 <input type="text" placeholder="New Item" autocomplete="off" name="newItem">
-                <button type="submit" id="pbtn" name="list" value="work" >+</button>
+                <button type="submit" id="pbtn" name="list" value="" >+</button>
             </div>
+        </form>
+        
     </div>
     
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script>
-    let addBtn = document.getElementById("pbtn");
-    addBtn.addEventListener("click",inputMsg);
-    function inputMsg(e){
-        let currentBtn = e.currentTarget;
-        let currentInputVal = currentBtn.previousElementSibling.value;
-        let newDiv = document.createElement("div");
-        let adder = document.getElementById("newAdder");
-        newDiv.classList.add("item");
-        newDiv.innerHTML=`<input type="checkbox" class="cut"name="">
-        <p >${currentInputVal}</p>`
-        
-        let parentlist = document.getElementById("box");
-        parentlist.appendChild(newDiv); 
-        adder.remove();
-        let newadder = document.createElement("div");
-        newadder.setAttribute("id","newAdder");
-        newadder.innerHTML=`<input type="text" placeholder="New Item" autocomplete="off" name="newItem">
-                <button type="submit" id="pbtn" name="list" value="work" >+</button>`;
-        parentlist.appendChild(newadder);
-        let addBtn = document.getElementById("pbtn");
-    addBtn.addEventListener("click",inputMsg);
+    var elem = document.getElementsByClassName('cut');
 
-        let check = newDiv.children[0];
-        check.addEventListener('click', event => {
+for(var i = 0; i < elem.length; i++) {
+ elem[i].addEventListener('click', event => {
             if(event.target.checked) {
-                let p = newDiv.children[1];
+                let p = event.target.nextElementSibling;
                 p.style.textDecoration = 'line-through';
+                console.log(p);
             }
             else{
-                let p = newDiv.children[1];
+                let p = event.target.nextElementSibling;
                 p.style.textDecoration = 'none';
             }
         });
-        //adding enter key listener
-        const inputElement = newadder.querySelector('input');
-
-    inputElement.addEventListener('keydown', addByEnter);
-    
-    
-}
-
-const inputElement = document.querySelector('#newAdder input');
-
-inputElement.addEventListener('keydown', addByEnter);
-
-function addByEnter(event) {
-    if (event.keyCode === 13 || event.key === 'Enter') {
-            let currentInputVal = event.currentTarget.value;
-        let newDiv = document.createElement("div");
-        let adder = document.getElementById("newAdder");
-        newDiv.classList.add("item");
-        newDiv.innerHTML=`<input type="checkbox" class="cut"name="">
-        <p >${currentInputVal}</p>`
-        
-        let parentlist = document.getElementById("box");
-        parentlist.appendChild(newDiv); 
-        adder.remove();
-        let newadder = document.createElement("div");
-        newadder.setAttribute("id","newAdder");
-        newadder.innerHTML=`<input type="text" placeholder="New Item" autocomplete="off" name="newItem">
-                <button type="submit" id="pbtn" name="list" value="work" >+</button>`;
-        parentlist.appendChild(newadder);
-        let addBtn = document.getElementById("pbtn");
-    addBtn.addEventListener("click",inputMsg);
-
-        let check = newDiv.children[0];
-        check.addEventListener('click', event => {
-            if(event.target.checked) {
-                let p = newDiv.children[1];
-                p.style.textDecoration = 'line-through';
-            }
-            else{
-                let p = newDiv.children[1];
-                p.style.textDecoration = 'none';
-            }
-        });
-        //adding enter key listener
-        const inputElement2 = newadder.querySelector('input');
-
-    inputElement2.addEventListener('keydown', addByEnter);
-    
-    
-        }
     }
 </script>
-
 <%- include("partials/footer.ejs") %>
