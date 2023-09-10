@@ -1,0 +1,32 @@
+<%- include("partials/header.ejs") %>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+<div class="box">
+
+<h1>Working!!</h1>
+
+
+    <form action="/work" class="list" method="post">
+    <div>
+        <input type="text" placeholder="New Item" autocomplete="off" name="newItem"> <!--do something about text overflow wrap-->
+        <button type="submit" name="list" value="Work">+</button>
+    </div>
+    </form>
+
+</div>
+
+</div>
+<script>
+    checkBox = document.getElementById('dumb').addEventListener('click', event => {
+	if(event.target.checked) {
+        var p = document.getElementById('dumb1')
+        p.style.textDecoration = 'line-through';
+    }
+    else{
+        var p = document.getElementById('dumb1')
+        p.style.textDecoration = 'none';
+    }
+});
+</script>
+
+<%- include("partials/footer.ejs") %>

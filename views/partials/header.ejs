@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Tilt+Prism&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+<header>
+    <div class="navbar">
+        <ul>
+            <li><h3><a href="/"><i class="far fa-calendar-alt"></i>Today</a></h3></li>
+            <li><h3><a href="/work"><i class="far fa-clone"></i>Work</a></h3></li>
+        </ul>
+    </div>
+<div class="container">
+
+<%  if (locals.day && locals.date && locals.month){%>
+
+    <div class="head">
+        <h1><%= day %>, <%= month %> &nbsp;<%= date %></h1>
+    </div>
+<%}else{%>
+    <div class="head">
+    <h1>Work List</h1>
+    </div>
+    <% } %>
+
+</header>
+<main class="container">

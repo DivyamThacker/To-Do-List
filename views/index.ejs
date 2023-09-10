@@ -1,0 +1,115 @@
+<%- include("partials/header.ejs") %>
+
+<div id="box">
+    
+    <!-- home -->
+    
+    <!-- <div class="item">
+        <input type="checkbox" class="cut"name="">
+        <p>Hello new item represented here Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, reiciendis!</p>
+    </div> -->
+    
+    <%  if (locals.day && locals.date && locals.month){%>
+        <!-- <form action="/" class="list" method="post" name="myform"> -->
+            <div id="newAdder">
+                <input type="text" placeholder="New Item" autocomplete="off" name="newItem">
+                <button type="submit" id="pbtn" name="list" value="<%= date %>" >+</button>
+            </div>
+        <!-- </form> -->
+        
+        <% } %>
+    </div>
+    
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script>
+    let addBtn = document.getElementById("pbtn");
+    addBtn.addEventListener("click",inputMsg);
+    function inputMsg(e){
+        let currentBtn = e.currentTarget;
+        let currentInputVal = currentBtn.previousElementSibling.value;
+        let newDiv = document.createElement("div");
+        let adder = document.getElementById("newAdder");
+        newDiv.classList.add("item");
+        newDiv.innerHTML=`<input type="checkbox" class="cut"name="">
+        <p >${currentInputVal}</p>`
+        
+        let parentlist = document.getElementById("box");
+        parentlist.appendChild(newDiv); 
+        adder.remove();
+        let newadder = document.createElement("div");
+        newadder.setAttribute("id","newAdder");
+        newadder.innerHTML=`<input type="text" placeholder="New Item" autocomplete="off" name="newItem">
+                <button type="submit" id="pbtn" name="list" value="<%= date %>" >+</button>`;
+        parentlist.appendChild(newadder);
+        let addBtn = document.getElementById("pbtn");
+    addBtn.addEventListener("click",inputMsg);
+
+        let check = newDiv.children[0];
+        check.addEventListener('click', event => {
+            if(event.target.checked) {
+                let p = newDiv.children[1];
+                p.style.textDecoration = 'line-through';
+            }
+            else{
+                let p = newDiv.children[1];
+                p.style.textDecoration = 'none';
+            }
+        });
+        //adding enter key listener
+        const inputElement = newadder.querySelector('input');
+
+    inputElement.addEventListener('keydown', addByEnter);
+    
+    
+}
+
+const inputElement = document.querySelector('#newAdder input');
+
+inputElement.addEventListener('keydown', addByEnter);
+
+function addByEnter(event) {
+    if (event.keyCode === 13 || event.key === 'Enter') {
+            console.log('Enter key was pressed teri maa kichut');
+            let currentInputVal = event.currentTarget.value;
+        let newDiv = document.createElement("div");
+        let adder = document.getElementById("newAdder");
+        newDiv.classList.add("item");
+        newDiv.innerHTML=`<input type="checkbox" class="cut"name="">
+        <p >${currentInputVal}</p>`
+        
+        let parentlist = document.getElementById("box");
+        parentlist.appendChild(newDiv); 
+        adder.remove();
+        let newadder = document.createElement("div");
+        newadder.setAttribute("id","newAdder");
+        newadder.innerHTML=`<input type="text" placeholder="New Item" autocomplete="off" name="newItem">
+                <button type="submit" id="pbtn" name="list" value="<%= date %>" >+</button>`;
+        parentlist.appendChild(newadder);
+        let addBtn = document.getElementById("pbtn");
+    addBtn.addEventListener("click",inputMsg);
+
+        let check = newDiv.children[0];
+        check.addEventListener('click', event => {
+            if(event.target.checked) {
+                let p = newDiv.children[1];
+                p.style.textDecoration = 'line-through';
+            }
+            else{
+                let p = newDiv.children[1];
+                p.style.textDecoration = 'none';
+            }
+        });
+        //adding enter key listener
+        const inputElement2 = newadder.querySelector('input');
+
+    inputElement2.addEventListener('keydown', addByEnter);
+    
+    
+        }
+    }
+    
+
+</script>
+<%- include("partials/footer.ejs") %>
