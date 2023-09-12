@@ -18,10 +18,10 @@
     </div>
 <div class="container">
 
-<%  if (locals.day && locals.date && locals.month){%>
+<%  if (locals.listTitle && locals.newListItems){%>
 
     <div class="head">
-        <h1><%= day %>, <%= month %> &nbsp;<%= date %></h1>
+        <h1><%=listTitle%></h1>
     </div>
 <%}else{%>
     <div class="head">

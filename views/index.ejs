@@ -2,46 +2,50 @@
 <div class="container">
 <div id="box">
     
-    <%  if (locals.day && locals.date && locals.month){%>
+    
 
-       <% if (locals.array && locals.size) {%>
+       <% if (locals.listTitle && locals.newListItems) {%>
 
-                <%  for (let i = 0; i <  size ; i++) {%>
-                    <div class="item">
-                        <input type="checkbox" class="cut"name="">
-                        <p><%= array[i]%></p>
-                    </div>
-                <%}%>
-       <% } %>
+                <%newListItems.forEach(function (item){%>   
+                    <form action="/delete" method="post">
+                        <div class="item">
+                            <input type="checkbox" class="cut" name="checkbox" value="<%= item._id %>" onChange="this.form.submit()">
+                            <p><%=item.name%></p>
+                        </div>
+                        <input type="hidden" name="listName" value="<%=  listTitle%>"></input>
+                    </form>
+                <% }) %>
+        <% } %>
+       
 
         <form action="/" class="list" method="post" name="myform">
             <div id="newAdder">
                 <input type="text" placeholder="New Item" autocomplete="off" name="newItem">
-                <button type="submit" id="pbtn" name="list" value="<%= date %>" >+</button>
+                <button type="submit" id="pbtn" name="list" value="<%= listTitle %>">+</button>
             </div>
         </form>
         
-        <% } %>
+        
     </div>
     
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script>
-    var elem = document.getElementsByClassName('cut');
+//     var elem = document.getElementsByClassName('cut');
 
-for(var i = 0; i < elem.length; i++) {
- elem[i].addEventListener('click', event => {
-            if(event.target.checked) {
-                let p = event.target.nextElementSibling;
-                p.style.textDecoration = 'line-through';
-                console.log(p);
-            }
-            else{
-                let p = event.target.nextElementSibling;
-                p.style.textDecoration = 'none';
-            }
-        });
-    }
+// for(var i = 0; i < elem.length; i++) {
+//  elem[i].addEventListener('click', event => {
+//             if(event.target.checked) {
+//                 let p = event.target.nextElementSibling;
+//                 p.style.textDecoration = 'line-through';
+//                 console.log(p);
+//             }
+//             else{
+//                 let p = event.target.nextElementSibling;
+//                 p.style.textDecoration = 'none';
+//             }
+//         });
+//     }
 </script>
 <%- include("partials/footer.ejs") %>
