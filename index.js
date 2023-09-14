@@ -1,8 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import _ from "lodash";
+
+dotenv.config();
 const app = express();
-const port = 3000;
+
 
 const date = new Date();
 
@@ -11,7 +14,14 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 
-   mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
+mongoose.connect(process.env.DATABASE_URL,
+   { useNewUrlParser: true, useUnifiedTopology: true})
+   .then(function(){
+        console.log("Mongo DB atlas is connected.");
+ })
+ .catch((error) => {
+    console.log(error);
+  });
 
     const itemsSchema = new mongoose.Schema({
         name: String
@@ -209,7 +219,6 @@ app.post("/delete", (req,res)=>{
 });
 
 
-app.listen(port, ()=>{
-    console.log(`listening on port: ${port}`);
-});
-
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on http://localhost:${process.env.PORT}`);
+  });
