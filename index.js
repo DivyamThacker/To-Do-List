@@ -14,7 +14,14 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 
-   mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
+mongoose.connect(process.env.DATABASE_URL,
+   { useNewUrlParser: true, useUnifiedTopology: true})
+   .then(function(){
+        console.log("Mongo DB atlas is connected.");
+ })
+ .catch((error) => {
+    console.log(error);
+  });
 
     const itemsSchema = new mongoose.Schema({
         name: String
@@ -210,6 +217,7 @@ app.post("/delete", (req,res)=>{
     }
 
 });
+
 
 app.listen(process.env.PORT, () => {
     console.log(`Server running on http://localhost:${process.env.PORT}`);
