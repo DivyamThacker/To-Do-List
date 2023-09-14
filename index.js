@@ -11,7 +11,11 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 
-   mongoose.connect("mongodb://127.0.0.1:27017/todolistDB");
+   mongoose.connect("mongodb+srv://Divyam_Thacker:Divyam%404147@cluster0.yfzzzaw.mongodb.net/todolistDB",
+   { useNewUrlParser: true, useUnifiedTopology: true})
+   .then(function(){
+        console.log("Mongo DB atlas is connected.");
+   });
 
     const itemsSchema = new mongoose.Schema({
         name: String
@@ -207,7 +211,6 @@ app.post("/delete", (req,res)=>{
     }
 
 });
-
 
 app.listen(port, ()=>{
     console.log(`listening on port: ${port}`);
